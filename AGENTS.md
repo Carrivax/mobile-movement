@@ -5,15 +5,30 @@ Foundry VTT module (v14+) for D&D 5e mobile movement/HP UI. Pure JS, no build st
 ## Entry & Loading
 
 - `module.json` ES module entry → `scripts/main.js`
-- Templates: `modules/mobile-movement/templates/...` (see `scripts/lib/constants.js`)
-- `main.js` registers Handlebars helpers in `init`, then on `setup` sets `core.noCanvas = true` for non-GMs, then on `ready` renders `MobileMovementApp` for non-GMs and resets `noCanvas` for GMs
+- Templates: `modules/${MODULE_ID}/templates/` (see `scripts/lib/constants.js`)
+- Hook flow in `main.js`:
+  1. `init` — register Handlebars helpers + module settings
+  2. `setup` — if non-GM + mobile user, set `core.noCanvas = true`
+  3. `ready` — GMs reset `noCanvas`. Non-GM mobile users: add `mobile-mode` class, render `MobileMovementApp`
+  4. `beforeunload` — non-GM mobile users restore `noCanvas` if overwritten
+  5. `renderSettingsConfig` — replaces the default text input of `mobileMode.enabledUsers` with inline user checkboxes
+
+## Settings
+
+Registered in `init` via `game.settings.register(MODULE_ID, ...)` using `SETTINGS` constants from `constants.js`:
+
+| Key | Type | Default | Scope | Description |
+| --- | ---- | ------- | ----- | ----------- |
+| `mobileMode.enabledUsers` | String | "" | world | Comma-separated user IDs with mobile mode active. Empty = all non-GMs. `config: true` — the settings panel replaces the default text input with inline checkboxes via the `renderSettingsConfig` hook. |
+
+New settings must be added to both `constants.js` (key constant) and `main.js` (register call).
 
 ## Structure
 
-- `scripts/apps/` — ApplicationV2 (not legacy Application) classes
+- `scripts/apps/` — `ApplicationV2` (not legacy `Application`) subclasses
 - `scripts/lib/` — pure utility functions (no state, no instances)
 - `templates/*.hbs` — Handlebars templates, Spanish text
-- `styles/mobile-movement.css` — single file, no preprocessor
+- `styles/mobile-movement.css` — single file, no preprocessor. Contains unused settings-UI classes (`.settings-hint`, `.settings-submit`, `.reset-movement`)
 
 ## Key Conventions
 
@@ -23,7 +38,6 @@ Foundry VTT module (v14+) for D&D 5e mobile movement/HP UI. Pure JS, no build st
 - **Combat**: movement tracked per-turn, reset on `updateCombat.turn` for selected actor.
 - **Pause**: movement/rotation blocked when `game.paused` (Foundry restriction).
 - **HP modal**: `document.createElement` appended to `body`, shown/hidden via `.visible` class.
-- **canvas**: `core.noCanvas = true` set in `setup` for non-GMs to hide the board; auto-reset on `ready` for GMs and on `beforeunload` for non-GMs.
 
 ## CSS z-index Stack
 

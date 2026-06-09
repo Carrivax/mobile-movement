@@ -1,5 +1,9 @@
 export const MODULE_ID = "mobile-movement";
 
+export const SETTINGS = {
+  ENABLED_USERS: "mobileMode.enabledUsers",
+};
+
 export const TEMPLATES = {
   MOVEMENT: `modules/${MODULE_ID}/templates/mobile-movement.hbs`,
   HP_CONTROL: `modules/${MODULE_ID}/templates/hp-control.hbs`,
