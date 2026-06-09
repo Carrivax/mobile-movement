@@ -707,6 +707,15 @@ body.mobile-mode #mobile-movement-hp {
   z-index: 10000 !important;
 }
 
+body.mobile-mode .window-app,
+body.mobile-mode .application.dialog {
+  z-index: 10001 !important;
+}
+
+body.mobile-mode #pause {
+  z-index: 10001 !important;
+}
+
 body.mobile-mode #mobile-movement .window-header,
 body.mobile-mode #mobile-movement-hp .window-header {
   display: none !important;

@@ -41,18 +41,14 @@ export function isMoveBlocked(tokenDoc, toX, toY) {
   const walls = scene.walls?.contents ?? [];
   if (!walls.length) return false;
 
-  // Determine the token's current elevation for floor-aware wall checking
   const tokenElev = tokenDoc.elevation ?? 0;
 
   for (const wall of walls) {
-    // Use _source for reliable data access in Foundry v14 embedded documents
     const data = wall._source ?? wall;
     if (Number(data.move ?? 1) < 1) continue;
 
-    // Skip walls not on the token's floor
-    if (!_isWallAtElevation(wall, data, tokenElev)) continue;
+    if (!_isWallAtElevation(wall, data, tokenElev, scene)) continue;
 
-    // Skip open doors: door > 0 (any type) AND ds === OPEN
     const doorType = Number(data.door ?? 0);
     const doorState = Number(data.ds ?? 0);
     if (doorType > 0 && doorState === CONST.WALL_DOOR_STATES.OPEN) continue;
@@ -67,8 +63,21 @@ export function isMoveBlocked(tokenDoc, toX, toY) {
   return false;
 }
 
-function _isWallAtElevation(wall, data, tokenElev) {
-  // 1) Native v14: threshold.elevation on wall document
+function _isWallAtElevation(wall, data, tokenElev, scene) {
+  // 1) Native v14 Scene Levels: wall.levels es un Set de Level IDs
+  const sceneLevels = scene.levels?.contents ?? [];
+  if (sceneLevels.length > 0) {
+    const wallLevels = wall.levels;
+    if (wallLevels?.size > 0) {
+      const tokenLevel = sceneLevels.find(l =>
+        tokenElev >= l.elevation.bottom && tokenElev <= l.elevation.top
+      );
+      if (tokenLevel) return wallLevels.has(tokenLevel.id);
+      return false;
+    }
+  }
+
+  // 2) Legacy: threshold.elevation
   const threshold = data.threshold ?? wall.threshold;
   if (threshold) {
     const elev = threshold.elevation;
@@ -81,14 +90,14 @@ function _isWallAtElevation(wall, data, tokenElev) {
     }
   }
 
-  // 2) Levels module (bytheripper): wall.flags.levels.wallElevation
+  // 3) Levels module (bytheripper): wall.flags.levels.wallElevation
   const lvlFlags = data.flags?.levels ?? wall.flags?.levels;
   if (lvlFlags?.wallElevation) {
     const { min, max } = lvlFlags.wallElevation;
     return (tokenElev >= (min ?? -Infinity)) && (tokenElev <= (max ?? Infinity));
   }
 
-  // No elevation data → wall affects all floors (backward compat)
+  // 4) Sin datos de elevación → bloquea en todos los pisos (compatibilidad)
   return true;
 }
 

@@ -126,6 +126,10 @@ export class MobileMovementApp extends HandlebarsApp {
       return this._warn("No hay token de este personaje en la escena actual.");
     }
 
+    if (game.paused) {
+      return this._warn("El juego está pausado. Espera a que el DM reanude la partida.");
+    }
+
     if (this._isInCombat() && !this._isMyTurn()) {
       return this._warn("No puedes moverte: no es tu turno.");
     }
@@ -145,7 +149,7 @@ export class MobileMovementApp extends HandlebarsApp {
     const actor = game.actors.get(this.selectedId);
     const walkSpeed = this._getWalkSpeed(actor);
     const distance = getMovementDistanceInUnits(direction, scene);
-    if (walkSpeed > 0 && this._movementUsed + distance > walkSpeed) {
+    if (this._isInCombat() && walkSpeed > 0 && this._movementUsed + distance > walkSpeed) {
       return this._warn(`Movimiento excede la velocidad (${walkSpeed} ${scene?.grid?.units || "ft"}).`);
     }
 
@@ -165,6 +169,9 @@ export class MobileMovementApp extends HandlebarsApp {
     const tokenDoc = this._getSelectedTokenDocument();
     if (!tokenDoc) {
       return this._warn("No hay token de este personaje en la escena actual.");
+    }
+    if (game.paused) {
+      return this._warn("El juego está pausado. Espera a que el DM reanude la partida.");
     }
     const delta = dir === "cw" ? ROTATION_STEP : -ROTATION_STEP;
     try {
