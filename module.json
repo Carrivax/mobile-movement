@@ -4,12 +4,12 @@
     "description": "Control de movimiento y HP desde dispositivos móviles para D&D 5.5",
     "version": "1.0.0",
     "compatibility": {
-        "minimum": "14.355",
+        "minimum": "14.363",
         "verified": "14"
     },
     "authors": [
         {
-            "name": "Cam"
+            "name": "Carrivas"
         }
     ],
     "esmodules": [
