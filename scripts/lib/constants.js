@@ -3,7 +3,6 @@ export const MODULE_ID = "mobile-movement";
 export const TEMPLATES = {
   MOVEMENT: `modules/${MODULE_ID}/templates/mobile-movement.hbs`,
   HP_CONTROL: `modules/${MODULE_ID}/templates/hp-control.hbs`,
-  USER_SETTINGS: `modules/${MODULE_ID}/templates/user-settings.hbs`,
 };
 
 export const ROTATION_STEP = 45;
