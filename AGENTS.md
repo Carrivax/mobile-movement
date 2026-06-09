@@ -22,6 +22,7 @@ Registered in `init` via `game.settings.register(MODULE_ID, ...)` using `SETTING
 | `mobileMode.enabledUsers` | String | `""` | world | Comma-separated user IDs with mobile mode active. Empty = all non-GMs. Config UI replaces text input with inline user checkboxes via `renderSettingsConfig` hook. |
 | `mobileMode.centerButtonAction` | String | `"hp-control"` | world | `"hp-control"` (default HP panel), `"foundry-sheet"` (native Foundry sheet), or `"level20"` (embedded Nivel20 page). GM configures for all users. |
 | `mobileMode.level20Urls` | String | `"{}"` | world | JSON mapping `actorId → URL`. Config UI displays all player-owned actors with inline URL text inputs, grouped by player. Only used when `centerButtonAction` is `"level20"`. |
+| `mobileMode.seatOrientation` | Number | `0` | user | Rotates d-pad directions to match the player's seat position around the TV: 0° (frente), 90° (derecha), 180° (revés), 270° (izquierda). Toggle button shown in the mobile UI. |
 
 ## Structure
 

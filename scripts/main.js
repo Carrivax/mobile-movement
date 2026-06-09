@@ -44,6 +44,21 @@ Hooks.once("init", () => {
     type: String,
     default: "{}",
   });
+
+  game.settings.register(MODULE_ID, SETTINGS.SEAT_ORIENTATION, {
+    name: "Orientación del asiento",
+    hint: "Ajusta la cruceta según tu posición respecto a la TV.",
+    scope: "user",
+    config: true,
+    type: Number,
+    default: 0,
+    choices: {
+      0: "0° (de frente)",
+      90: "90° (lado derecho)",
+      180: "180° (del revés)",
+      270: "270° (lado izquierdo)",
+    },
+  });
 });
 
 Hooks.once("setup", () => {

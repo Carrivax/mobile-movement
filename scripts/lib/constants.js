@@ -4,6 +4,7 @@ export const SETTINGS = {
   ENABLED_USERS: "mobileMode.enabledUsers",
   CENTER_BUTTON_ACTION: "mobileMode.centerButtonAction",
   LEVEL20_URLS: "mobileMode.level20Urls",
+  SEAT_ORIENTATION: "mobileMode.seatOrientation",
 };
 
 export const TEMPLATES = {

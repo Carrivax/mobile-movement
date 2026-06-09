@@ -223,6 +223,24 @@
   height: 36px;
 }
 
+.seat-toggle {
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+  padding: 4px 6px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #2a2a2a;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.seat-toggle:active {
+  background: #444;
+}
+
 /* Movement bar */
 .movement-bar {
   display: flex;
@@ -843,6 +861,11 @@ body.mobile-mode .inspire-indicator {
   font-size: 30px;
   width: 44px;
   height: 40px;
+}
+
+body.mobile-mode .seat-toggle {
+  font-size: 13px;
+  padding: 6px 8px;
 }
 
 body.mobile-mode .mobile-movement-container {

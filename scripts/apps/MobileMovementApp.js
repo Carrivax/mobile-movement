@@ -1,5 +1,5 @@
 import { TEMPLATES, ROTATION_STEP, SETTINGS, MODULE_ID } from "../lib/constants.js";
-import { snapToGrid, getMovementDelta, isMoveBlocked, isDiagonalDirection, isDiagonalAllowed, getMovementDistanceInUnits, gridDistanceBetween } from "../lib/movement.js";
+import { snapToGrid, getMovementDelta, isMoveBlocked, isDiagonalDirection, isDiagonalAllowed, getMovementDistanceInUnits, gridDistanceBetween, transformDirection } from "../lib/movement.js";
 import { getHPData, getInspiration } from "../lib/actor-data.js";
 import { HPControlApp } from "./HPControlApp.js";
 
@@ -67,6 +67,7 @@ export class MobileMovementApp extends HandlebarsApp {
     const gridUnits = game.scenes.active?.grid?.units ?? "ft";
     const inCombat = this._isInCombat();
     const combat = game.combats?.active;
+    const seatOrientation = game.settings.get(MODULE_ID, SETTINGS.SEAT_ORIENTATION) || 0;
     const combatStarted = combat?.started === true;
     const isMyTurn = this._isMyTurn();
     return {
@@ -82,6 +83,7 @@ export class MobileMovementApp extends HandlebarsApp {
       inspiration: actor ? getInspiration(actor) : false,
       inCombat,
       combatStarted,
+      seatOrientation,
       isMyTurn,
       movement: combatStarted ? {
         used: this._movementUsed,
@@ -100,6 +102,7 @@ export class MobileMovementApp extends HandlebarsApp {
     html.on("click.mm", ".rotate-btn", this._onRotate.bind(this));
     html.on("click.mm", ".hp-mod-btn", this._onHPMod.bind(this));
     html.on("click.mm", ".center-token", this._onOpenHP.bind(this));
+    html.on("click.mm", ".seat-toggle", this._onSeatToggle.bind(this));
     html.on("click.mm", ".hp-current", this._onHPClick.bind(this));
     html.on("blur.mm", ".hp-input", this._onHPInput.bind(this));
     html.on("keydown.mm", ".hp-input", this._onHPInputKeydown.bind(this));
@@ -121,6 +124,8 @@ export class MobileMovementApp extends HandlebarsApp {
 
   async _onMove(event) {
     const direction = event.currentTarget.dataset.direction;
+    const seatAngle = game.settings.get(MODULE_ID, SETTINGS.SEAT_ORIENTATION) || 0;
+    const mappedDirection = transformDirection(direction, seatAngle);
     const tokenDoc = this._getSelectedTokenDocument();
     if (!tokenDoc) {
       return this._warn("No hay token de este personaje en la escena actual.");
@@ -135,12 +140,12 @@ export class MobileMovementApp extends HandlebarsApp {
     }
 
     const scene = game.scenes.active;
-    if (isDiagonalDirection(direction) && !isDiagonalAllowed(scene)) {
+    if (isDiagonalDirection(mappedDirection) && !isDiagonalAllowed(scene)) {
       return this._warn("Movimiento diagonal no permitido en esta escena.");
     }
 
     const step = scene?.grid?.size || 100;
-    const { dx, dy } = getMovementDelta(direction, step);
+    const { dx, dy } = getMovementDelta(mappedDirection, step);
     const pos = snapToGrid(tokenDoc.x + dx, tokenDoc.y + dy);
     if (isMoveBlocked(tokenDoc, pos.x, pos.y)) {
       return this._warn("Hay una pared en el camino.");
@@ -148,7 +153,7 @@ export class MobileMovementApp extends HandlebarsApp {
 
     const actor = game.actors.get(this.selectedId);
     const walkSpeed = this._getWalkSpeed(actor);
-    const distance = getMovementDistanceInUnits(direction, scene);
+    const distance = getMovementDistanceInUnits(mappedDirection, scene);
     if (this._isInCombat() && walkSpeed > 0 && this._movementUsed + distance > walkSpeed) {
       return this._warn(`Movimiento excede la velocidad (${walkSpeed} ${scene?.grid?.units || "ft"}).`);
     }
@@ -233,6 +238,13 @@ export class MobileMovementApp extends HandlebarsApp {
     for (const h of this._hooks) Hooks.off(h);
     this._hooks = [];
     return super.close(options);
+  }
+
+  async _onSeatToggle(event) {
+    const current = game.settings.get(MODULE_ID, SETTINGS.SEAT_ORIENTATION) || 0;
+    const next = current >= 270 ? 0 : current + 90;
+    await game.settings.set(MODULE_ID, SETTINGS.SEAT_ORIENTATION, next);
+    this.render();
   }
 
   async _onHPMod(event) {

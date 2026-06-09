@@ -129,6 +129,34 @@ export function getMovementDistanceInUnits(direction, scene) {
   return Math.round(dist);
 }
 
+const SEAT_TRANSFORMS = {
+  0: {
+    up: "up", down: "down", left: "left", right: "right",
+    "up-left": "up-left", "up-right": "up-right",
+    "down-left": "down-left", "down-right": "down-right",
+  },
+  90: {
+    up: "left", down: "right", left: "down", right: "up",
+    "up-left": "down-left", "up-right": "up-left",
+    "down-right": "up-right", "down-left": "down-right",
+  },
+  180: {
+    up: "down", down: "up", left: "right", right: "left",
+    "up-left": "down-right", "up-right": "down-left",
+    "down-left": "up-right", "down-right": "up-left",
+  },
+  270: {
+    up: "right", down: "left", left: "up", right: "down",
+    "up-left": "up-right", "up-right": "down-right",
+    "down-right": "down-left", "down-left": "up-left",
+  },
+};
+
+export function transformDirection(direction, seatAngle) {
+  const map = SEAT_TRANSFORMS[seatAngle] || SEAT_TRANSFORMS[0];
+  return map[direction] || direction;
+}
+
 export function gridDistanceBetween(pos1, pos2, scene) {
   const grid = scene?.grid;
   if (!grid) return 0;
