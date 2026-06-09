@@ -1,4 +1,4 @@
-import { TEMPLATES, ROTATION_STEP } from "../lib/constants.js";
+import { TEMPLATES, ROTATION_STEP, SETTINGS, MODULE_ID } from "../lib/constants.js";
 import { snapToGrid, getMovementDelta, isMoveBlocked, isDiagonalDirection, isDiagonalAllowed, getMovementDistanceInUnits, gridDistanceBetween } from "../lib/movement.js";
 import { getHPData, getInspiration } from "../lib/actor-data.js";
 import { HPControlApp } from "./HPControlApp.js";
@@ -282,9 +282,27 @@ export class MobileMovementApp extends HandlebarsApp {
 
   async _onOpenHP(event) {
     if (!this.selectedId) return;
+    const action = game.settings.get(MODULE_ID, SETTINGS.CENTER_BUTTON_ACTION);
+    if (action === "foundry-sheet") {
+      const actor = game.actors.get(this.selectedId);
+      if (actor?.sheet) return actor.sheet.render(true);
+    }
+    if (action === "level20") {
+      const raw = game.settings.get(MODULE_ID, SETTINGS.LEVEL20_URLS) || "{}";
+      let urls = {};
+      try { urls = JSON.parse(raw); } catch(e) {}
+      const url = urls[this.selectedId];
+      if (url) return this._openLevel20(url);
+      ui.notifications.warn("No hay URL de Nivel20 configurada para este personaje.");
+      return;
+    }
     if (this._hpApp) await this._hpApp.close();
     this._hpApp = new HPControlApp(this.selectedId, this);
     this._hpApp.render(true);
     this.element.style.display = "none";
+  }
+
+  _openLevel20(url) {
+    window.open(url, "_blank");
   }
 }

@@ -15,20 +15,32 @@ Foundry VTT module (v14+) for D&D 5e mobile movement/HP UI. Pure JS, no build st
 
 ## Settings
 
-Registered in `init` via `game.settings.register(MODULE_ID, ...)` using `SETTINGS` constants from `constants.js`:
+Registered in `init` via `game.settings.register(MODULE_ID, ...)` using `SETTINGS` from `constants.js`. New settings must be added in both places.
 
 | Key | Type | Default | Scope | Description |
 | --- | ---- | ------- | ----- | ----------- |
-| `mobileMode.enabledUsers` | String | "" | world | Comma-separated user IDs with mobile mode active. Empty = all non-GMs. `config: true` — the settings panel replaces the default text input with inline checkboxes via the `renderSettingsConfig` hook. |
-
-New settings must be added to both `constants.js` (key constant) and `main.js` (register call).
+| `mobileMode.enabledUsers` | String | `""` | world | Comma-separated user IDs with mobile mode active. Empty = all non-GMs. Config UI replaces text input with inline user checkboxes via `renderSettingsConfig` hook. |
+| `mobileMode.centerButtonAction` | String | `"hp-control"` | world | `"hp-control"` (default HP panel), `"foundry-sheet"` (native Foundry sheet), or `"level20"` (embedded Nivel20 page). GM configures for all users. |
+| `mobileMode.level20Urls` | String | `"{}"` | world | JSON mapping `actorId → URL`. Config UI displays all player-owned actors with inline URL text inputs, grouped by player. Only used when `centerButtonAction` is `"level20"`. |
 
 ## Structure
 
 - `scripts/apps/` — `ApplicationV2` (not legacy `Application`) subclasses
 - `scripts/lib/` — pure utility functions (no state, no instances)
 - `templates/*.hbs` — Handlebars templates, Spanish text
-- `styles/mobile-movement.css` — single file, no preprocessor. Contains unused settings-UI classes (`.settings-hint`, `.settings-submit`, `.reset-movement`)
+- `styles/mobile-movement.css` — single file, no preprocessor
+
+## D-Pad Center Button
+
+The d-pad center button (`.center-token`) behavior depends on `mobileMode.centerButtonAction` (user setting):
+
+| Action | Behavior |
+| ------ | -------- |
+| `hp-control` | Opens `HPControlApp` overlay (saves, skills, actions, items, spells). |
+| `foundry-sheet` | Calls `actor.sheet.render(true)` — native Foundry character sheet. |
+| `level20` | Opens the configured Nivel20 URL in a new browser tab (`window.open`). |
+
+When `HPControlApp` is closed via "Volver", it returns to `MobileMovementApp`.
 
 ## Key Conventions
 
