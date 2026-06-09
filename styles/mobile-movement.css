@@ -1,0 +1,1070 @@
+#loading {
+  display: none !important;
+}
+
+.settings-hint {
+  margin: 0 0 8px 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.user-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.settings-empty {
+  color: #666;
+  font-size: 13px;
+}
+
+.settings-submit {
+  margin-top: 12px;
+}
+
+.no-characters {
+  color: #888;
+  padding: 8px;
+  font-size: 13px;
+  width: 100%;
+  text-align: center;
+}
+
+.no-token-warning {
+  color: #c44;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.mobile-movement .window-content {
+  background: #1e1e1e;
+  color: #ddd;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hp-tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #444;
+  flex-shrink: 0;
+}
+
+.hp-tab {
+  flex: 1;
+  height: 44px;
+  font-size: 14px;
+  font-weight: bold;
+  background: #2a2a2a;
+  color: #888;
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s;
+}
+
+.hp-tab.active {
+  background: #1e1e1e;
+  color: #ff6400;
+  border-bottom: 2px solid #ff6400;
+}
+
+.hp-tab-content {
+  display: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  gap: 10px;
+}
+
+.hp-tab-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.hp-section-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 4px;
+}
+
+.save-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.save-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 6px 4px;
+  min-height: 52px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #ddd;
+  font-family: inherit;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.save-item:active {
+  background: #444;
+}
+
+.save-item.proficient {
+  border-color: #ff6400;
+}
+
+.save-label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.save-bonus {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.inspire-indicator {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 36px;
+}
+
+/* Movement bar */
+.movement-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.movement-label {
+  color: #888;
+}
+
+.movement-used {
+  font-weight: bold;
+  color: #ff6400;
+}
+
+.movement-sep {
+  color: #555;
+}
+
+.movement-max {
+  font-weight: bold;
+  color: #ddd;
+}
+
+.movement-units {
+  color: #888;
+}
+
+.movement-remaining {
+  font-size: 11px;
+  color: #4caf50;
+}
+
+.movement-remaining.exhausted {
+  color: #c44;
+}
+
+.reset-movement {
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  background: #3a3a3a;
+  color: #aaa;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+.inspire-indicator {
+  color: #ffd700;
+}
+
+.inspire-indicator.no-inspire {
+  color: #555;
+}
+
+.skill-list {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  color: #ddd;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.skill-item:active {
+  background: #444;
+}
+
+.skill-item.proficient {
+  border-color: #555;
+  background: #303030;
+}
+
+.skill-label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.skill-label em {
+  font-size: 11px;
+  color: #777;
+  font-style: normal;
+}
+
+.skill-bonus {
+  font-size: 17px;
+  font-weight: bold;
+  color: #ddd;
+  min-width: 32px;
+  text-align: right;
+}
+
+.item-list {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.hp-tab-content[data-tab="actions"] .item-row {
+  cursor: pointer;
+}
+
+.hp-tab-content[data-tab="actions"] .item-row:active {
+  background: #3a3a3a;
+}
+
+.item-row img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.item-name {
+  flex: 1;
+  font-size: 14px;
+  color: #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-qty {
+  font-size: 12px;
+  color: #888;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.currency-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.currency-item {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: #ccc;
+}
+
+.currency-item b {
+  color: #ff6400;
+  margin-right: 4px;
+}
+
+.hp-empty {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+.mobile-movement-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* Character bar */
+.character-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+  border-bottom: 1px solid #444;
+  margin-bottom: 8px;
+  min-height: 64px;
+}
+
+.character-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 60px;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.character-item:hover {
+  border-color: #888;
+}
+
+.character-item.selected {
+  border-color: #ff6400;
+  background: rgba(255, 100, 0, 0.15);
+}
+
+.character-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #666;
+  object-fit: cover;
+}
+
+.character-item span {
+  font-size: 11px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+
+/* D-Pad */
+.control-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.dpad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dpad-grid {
+  display: grid;
+  grid-template-columns: 64px 64px 64px;
+  grid-template-rows: 64px 64px 64px;
+  gap: 4px;
+}
+
+.move-btn {
+  width: 64px;
+  height: 64px;
+  font-size: 22px;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.move-btn:active {
+  background: #555;
+}
+
+.center-token {
+  width: 64px;
+  height: 64px;
+  background: #2a2a2a;
+  border: 2px solid #ff6400;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.center-token:active {
+  border-color: #ffaa00;
+}
+
+.center-token img {
+  width: 54px;
+  height: 54px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.dpad-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.rotate-btn {
+  width: 48px;
+  height: 36px;
+  font-size: 18px;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.rotate-btn:active {
+  background: #555;
+}
+
+/* HP strip on main screen */
+.hp-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.hp-value {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hp-icon {
+  margin-right: 2px;
+}
+
+.hp-sep {
+  color: #888;
+}
+
+.hp-temp {
+  font-size: 12px;
+  color: #2196f3;
+  margin-left: 4px;
+}
+
+/* Not my turn */
+.not-my-turn {
+  font-size: 14px;
+  color: #ff9800;
+  text-align: center;
+  padding: 6px 0;
+  width: 100%;
+}
+
+/* No selection */
+.no-selection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 16px;
+}
+
+/* HP Control Window */
+
+.hp-control-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  gap: 12px;
+  padding: 12px;
+}
+
+.hp-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.hp-header img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #666;
+  object-fit: cover;
+}
+
+.hp-header h3 {
+  margin: 0;
+  font-size: 16px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hp-current {
+  color: #4caf50;
+  cursor: pointer;
+}
+
+.hp-input {
+  display: none;
+  width: 54px;
+  height: 30px;
+  background: #1e1e1e;
+  color: #4caf50;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-family: inherit;
+}
+
+.hp-input.visible {
+  display: inline-block;
+}
+
+.hp-max {
+  color: #aaa;
+}
+
+.hp-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hp-mod-btn {
+  width: 52px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.hp-mod-btn:active {
+  background: #555;
+}
+
+.hp-mod-btn[data-delta^="-"] {
+  border-color: #c44;
+}
+
+.hp-mod-btn[data-delta^="+"] {
+  border-color: #4caf50;
+}
+
+/* ==========================================
+   MOBILE MODE: hides Foundry UI, full-screen
+   ========================================== */
+
+body.mobile-mode #board,
+body.mobile-mode #sidebar,
+body.mobile-mode #navigation,
+body.mobile-mode #hotbar,
+body.mobile-mode #controls,
+body.mobile-mode #players,
+body.mobile-mode #loading,
+body.mobile-mode #ui-middle,
+body.mobile-mode #ui-left,
+body.mobile-mode #ui-right,
+body.mobile-mode #ui-top,
+body.mobile-mode #ui-bottom {
+  display: none !important;
+}
+
+body.mobile-mode #client-error {
+  display: none !important;
+}
+
+body.mobile-mode {
+  overflow: hidden !important;
+  touch-action: manipulation !important;
+  background: #1e1e1e !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.mobile-mode #game-world {
+  display: none !important;
+}
+
+body.mobile-mode #mobile-movement,
+body.mobile-mode #mobile-movement-hp {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.mobile-mode #mobile-movement {
+  z-index: 9999 !important;
+}
+
+body.mobile-mode #mobile-movement-hp {
+  z-index: 10000 !important;
+}
+
+body.mobile-mode #mobile-movement .window-header,
+body.mobile-mode #mobile-movement-hp .window-header {
+  display: none !important;
+}
+
+body.mobile-mode #mobile-movement .window-content,
+body.mobile-mode #mobile-movement-hp .window-content {
+  height: 100% !important;
+}
+
+body.mobile-mode .dpad-grid {
+  grid-template-columns: 72px 72px 72px;
+  grid-template-rows: 72px 72px 72px;
+}
+
+body.mobile-mode .move-btn {
+  width: 72px;
+  height: 72px;
+  font-size: 24px;
+}
+
+body.mobile-mode .center-token {
+  width: 72px;
+  height: 72px;
+}
+
+body.mobile-mode .center-token img {
+  width: 62px;
+  height: 62px;
+}
+
+body.mobile-mode .character-item img {
+  width: 48px;
+  height: 48px;
+}
+
+body.mobile-mode .character-item span {
+  font-size: 13px;
+  max-width: 80px;
+}
+
+body.mobile-mode .dpad-row .rotate-btn {
+  width: 56px;
+  height: 40px;
+  font-size: 20px;
+}
+
+body.mobile-mode .hp-mod-btn {
+  width: 58px;
+  height: 42px;
+  font-size: 16px;
+}
+
+body.mobile-mode .hp-value {
+  font-size: 22px;
+}
+
+body.mobile-mode .inspire-indicator {
+  font-size: 30px;
+  width: 44px;
+  height: 40px;
+}
+
+body.mobile-mode .mobile-movement-container {
+  padding: 12px;
+}
+
+body.mobile-mode .hp-control-container {
+  gap: 0;
+}
+
+body.mobile-mode .hp-header h3 {
+  font-size: 18px;
+}
+
+body.mobile-mode .hp-header img {
+  width: 44px;
+  height: 44px;
+}
+
+/* Spells tab */
+.spell-slots {
+  font-size: 11px;
+  color: #888;
+  font-weight: normal;
+  margin-left: 6px;
+}
+
+.spell-badge {
+  font-size: 10px;
+  color: #888;
+  background: #3a3a3a;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+
+.spell-badge.prepared {
+  color: #4caf50;
+  border-color: #4caf50;
+}
+
+/* Cast button in description modal */
+.desc-modal-cast-btn {
+  width: 100%;
+  height: 44px;
+  font-size: 15px;
+  font-weight: bold;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.desc-modal-cast-btn:active {
+  background: #388e3c;
+}
+
+/* HP tempmax indicator */
+.hp-tempmax {
+  color: #4caf50 !important;
+}
+
+body.mobile-mode .movement-bar {
+  font-size: 14px;
+}
+
+body.mobile-mode .reset-movement {
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+}
+
+.hp-close-btn {
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #555;
+  color: #fff;
+  border: 2px solid #777;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  margin-top: 4px;
+}
+
+.hp-close-btn:active {
+  background: #777;
+}
+
+/* Roll modal */
+.roll-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.roll-modal.visible {
+  display: flex;
+}
+
+.roll-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.roll-modal-box {
+  position: relative;
+  z-index: 1;
+  background: #2a2a2a;
+  border: 2px solid #555;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.roll-modal-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ddd;
+  text-align: center;
+}
+
+.roll-modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.roll-option-btn {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.roll-option-btn:active {
+  background: #555;
+}
+
+.roll-option-btn[data-roll="advantage"] {
+  border-color: #4caf50;
+}
+
+.roll-option-btn[data-roll="disadvantage"] {
+  border-color: #c44;
+}
+
+.roll-modal-cancel {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  background: #222;
+  color: #888;
+  border: 1px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  font-family: inherit;
+}
+
+/* Description modal */
+.desc-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.desc-modal.visible {
+  display: flex;
+}
+
+.desc-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.desc-modal-box {
+  position: relative;
+  z-index: 1;
+  background: #2a2a2a;
+  border: 2px solid #555;
+  border-radius: 12px;
+  max-width: 85vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.desc-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+}
+
+.desc-modal-header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.desc-modal-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #ddd;
+}
+
+.desc-modal-details {
+  padding: 8px 16px;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+}
+
+.desc-modal-details:empty {
+  display: none;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #888;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.detail-value {
+  color: #ddd;
+  text-align: right;
+}
+
+.desc-modal-content {
+  overflow-y: auto;
+  padding: 16px;
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.5;
+}
+
+.desc-modal-content p {
+  margin: 0 0 8px 0;
+}
+
+.desc-modal-close {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  background: #222;
+  color: #888;
+  border: none;
+  border-top: 1px solid #444;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.desc-modal-close:active {
+  background: #333;
+}

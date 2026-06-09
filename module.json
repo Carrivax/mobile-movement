@@ -1,0 +1,22 @@
+{
+    "id": "mobile-movement",
+    "title": "Mobile Movement",
+    "description": "Control de movimiento y HP desde dispositivos móviles para D&D 5.5",
+    "version": "1.0.0",
+    "compatibility": {
+        "minimum": "14.355",
+        "verified": "14"
+    },
+    "authors": [
+        {
+            "name": "Cam"
+        }
+    ],
+    "esmodules": [
+        "scripts/main.js"
+    ],
+    "styles": [
+        "styles/mobile-movement.css"
+    ],
+    "protected": false
+}

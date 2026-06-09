@@ -1,0 +1,157 @@
+<div class="hp-control-container">
+  <div class="hp-tabs">
+    <button class="hp-tab active" data-tab="stats">Tiradas</button>
+    <button class="hp-tab" data-tab="actions">Acciones</button>
+    <button class="hp-tab" data-tab="items">Objetos</button>
+    <button class="hp-tab" data-tab="spells">Conjuros</button>
+  </div>
+
+  <div class="hp-tab-content active" data-tab="stats">
+    <div class="hp-header">
+      <img src="{{img}}" alt="{{name}}">
+      <h3>{{name}}</h3>
+    </div>
+
+    <div class="hp-section-title">Tiradas de Salvación</div>
+    <div class="save-grid">
+      {{#each saves}}
+      <button class="save-item{{#if this.proficient}} proficient{{/if}}" data-ability="{{this.id}}">
+        <span class="save-label">{{this.label}}</span>
+        <span class="save-bonus">{{this.total}}</span>
+      </button>
+      {{/each}}
+    </div>
+
+    <div class="hp-section-title">Habilidades</div>
+    <div class="skill-list">
+      {{#each skills}}
+      <button class="skill-item{{#if this.proficient}} proficient{{/if}}" data-skill="{{this.id}}">
+        <span class="skill-label">{{this.label}} <em>({{this.ability}})</em></span>
+        <span class="skill-bonus">{{this.total}}</span>
+      </button>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="hp-tab-content" data-tab="actions">
+    {{#if actions.length}}
+    <div class="hp-section-title">Acciones</div>
+    <div class="item-list">
+      {{#each actions}}
+      <div class="item-row" data-item-id="{{this.id}}">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if bonusActions.length}}
+    <div class="hp-section-title">Acciones Bonus</div>
+    <div class="item-list">
+      {{#each bonusActions}}
+      <div class="item-row" data-item-id="{{this.id}}">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if reactions.length}}
+    <div class="hp-section-title">Reacciones</div>
+    <div class="item-list">
+      {{#each reactions}}
+      <div class="item-row" data-item-id="{{this.id}}">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#unless actions.length}}{{#unless bonusActions.length}}{{#unless reactions.length}}
+    <div class="hp-empty">Sin acciones disponibles</div>
+    {{/unless}}{{/unless}}{{/unless}}
+  </div>
+
+  <div class="hp-tab-content" data-tab="items">
+    <div class="hp-section-title">Monedas</div>
+    <div class="currency-row">
+      <span class="currency-item"><b>PP</b> {{currency.pp}}</span>
+      <span class="currency-item"><b>PO</b> {{currency.gp}}</span>
+      <span class="currency-item"><b>PE</b> {{currency.ep}}</span>
+      <span class="currency-item"><b>PP</b> {{currency.sp}}</span>
+      <span class="currency-item"><b>PC</b> {{currency.cp}}</span>
+    </div>
+
+    {{#if equipment.length}}
+    <div class="hp-section-title">Equipo</div>
+    <div class="item-list">
+      {{#each equipment}}
+      <div class="item-row">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+        {{#if (gt this.qty 1)}}<span class="item-qty">×{{this.qty}}</span>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if consumables.length}}
+    <div class="hp-section-title">Consumibles</div>
+    <div class="item-list">
+      {{#each consumables}}
+      <div class="item-row">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+        {{#if (gt this.qty 1)}}<span class="item-qty">×{{this.qty}}</span>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if loot.length}}
+    <div class="hp-section-title">Objetos</div>
+    <div class="item-list">
+      {{#each loot}}
+      <div class="item-row">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+        {{#if (gt this.qty 1)}}<span class="item-qty">×{{this.qty}}</span>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#unless equipment.length}}{{#unless consumables.length}}{{#unless loot.length}}
+    <div class="hp-empty">Sin objetos en el inventario</div>
+    {{/unless}}{{/unless}}{{/unless}}
+  </div>
+
+  <div class="hp-tab-content" data-tab="spells">
+    {{#each spells}}
+    <div class="hp-section-title">
+      {{#if (eq this.level 0)}}Trucos{{else}}Nivel {{this.level}}{{/if}}
+      {{#if this.slots}}
+      <span class="spell-slots">({{this.slots.value}}/{{this.slots.max}})</span>
+      {{/if}}
+    </div>
+    <div class="item-list">
+      {{#each this.items}}
+      <div class="item-row" data-item-id="{{this.id}}">
+        <img src="{{this.img}}" alt="{{this.name}}">
+        <span class="item-name">{{this.name}}</span>
+        {{#if this.activation}}<span class="spell-activation">{{this.activation}}</span>{{/if}}
+        {{#if this.alwaysPrepared}}<span class="spell-badge">Prep.</span>{{else if this.prepared}}<span class="spell-badge prepared">Prep.</span>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/each}}
+    {{#unless spells.length}}
+    <div class="hp-empty">Sin conjuros conocidos</div>
+    {{/unless}}
+  </div>
+
+  <button class="hp-close-btn">Volver</button>
+</div>

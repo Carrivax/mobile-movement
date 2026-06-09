@@ -1,0 +1,91 @@
+<div class="mobile-movement-container">
+  <div class="character-bar">
+    {{#each characters}}
+    <div class="character-item{{#if (eq ../selectedId this.id)}} selected{{/if}}" data-actor-id="{{this.id}}">
+      <img src="{{this.img}}" alt="{{this.name}}">
+      <span>{{this.name}}</span>
+    </div>
+    {{/each}}
+    {{#unless characters.length}}
+    <div class="no-characters">
+      No tienes personajes asignados
+    </div>
+    {{/unless}}
+  </div>
+
+  {{#if selectedActor}}
+  <div class="control-area">
+    <div class="hp-strip">
+      <div class="hp-value">
+        <span class="hp-icon">❤</span>
+        <input type="number" class="hp-input" value="{{hp.value}}" min="0" max="{{hp.effectiveMax}}" inputmode="numeric">
+        <span class="hp-current">{{hp.value}}</span>
+        <span class="hp-sep">/</span>
+        <span class="hp-max">{{hp.effectiveMax}}</span>
+        {{#if hp.temp}}<span class="hp-temp">(+{{hp.temp}})</span>{{/if}}
+        {{#if hp.tempmax}}<span class="hp-temp hp-tempmax">(+{{hp.tempmax}} temp)</span>{{/if}}
+      </div>
+      <span class="inspire-indicator{{#unless inspiration}} no-inspire{{/unless}}" title="{{#if inspiration}}Tienes Inspiración{{else}}Sin Inspiración{{/if}}">
+        {{#if inspiration}}★{{else}}☆{{/if}}
+      </span>
+    </div>
+
+    {{#if combatStarted}}
+    <div class="movement-bar">
+      <span class="movement-label">Movimiento:</span>
+      <span class="movement-used">{{movement.used}}</span>
+      <span class="movement-sep">/</span>
+      <span class="movement-max">{{movement.max}}</span>
+      <span class="movement-units">{{movement.units}}</span>
+      <span class="movement-remaining{{#if (eq movement.remaining 0)}} exhausted{{/if}}">({{movement.remaining}} restantes)</span>
+    </div>
+
+    {{#unless isMyTurn}}
+    <div class="not-my-turn">⏳ Esperando tu turno...</div>
+    {{/unless}}
+    {{/if}}
+
+    <div class="hp-buttons">
+      <button class="hp-mod-btn" data-delta="-10">-10</button>
+      <button class="hp-mod-btn" data-delta="-5">-5</button>
+      <button class="hp-mod-btn" data-delta="-1">-1</button>
+      <button class="hp-mod-btn" data-delta="+1">+1</button>
+      <button class="hp-mod-btn" data-delta="+5">+5</button>
+      <button class="hp-mod-btn" data-delta="+10">+10</button>
+    </div>
+
+    <div class="dpad-container">
+      <div class="dpad-row">
+        <button class="rotate-btn" data-rotate="ccw" title="↺">↺</button>
+      </div>
+      <div class="dpad-grid">
+        <button class="move-btn" data-direction="up-left">↖</button>
+        <button class="move-btn" data-direction="up">↑</button>
+        <button class="move-btn" data-direction="up-right">↗</button>
+        <button class="move-btn" data-direction="left">←</button>
+        <div class="center-token" title="Abrir control de HP">
+          <img src="{{selectedActor.img}}" alt="{{selectedActor.name}}">
+        </div>
+        <button class="move-btn" data-direction="right">→</button>
+        <button class="move-btn" data-direction="down-left">↙</button>
+        <button class="move-btn" data-direction="down">↓</button>
+        <button class="move-btn" data-direction="down-right">↘</button>
+      </div>
+      <div class="dpad-row">
+        <button class="rotate-btn" data-rotate="cw" title="↻">↻</button>
+      </div>
+    </div>
+
+    {{#unless hasToken}}
+    <div class="no-token-warning">
+      ⚠ Este personaje no tiene token en la escena actual
+    </div>
+    {{/unless}}
+  </div>
+
+  {{else}}
+  <div class="no-selection">
+    Selecciona un personaje
+  </div>
+  {{/if}}
+</div>
