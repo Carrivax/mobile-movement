@@ -40,5 +40,7 @@ jobs:
           tag_name: v${{ steps.version.outputs.version }}
           name: v${{ steps.version.outputs.version }}
           body: "Release v${{ steps.version.outputs.version }}"
-          files: release/module.zip
+          files: |
+            release/module.zip
+            module.json
           generate_release_notes: true
